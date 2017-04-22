@@ -179,8 +179,13 @@ public class Notification {
             getAlarmMgr().setRepeating(AlarmManager.RTC_WAKEUP,
                     triggerTime, options.getRepeatInterval(), pi);
         } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                getAlarmMgr().setExact(AlarmManager.RTC_WAKEUP, triggerTime, pi);
+            } else {
+                getAlarmMgr().set(AlarmManager.RTC_WAKEUP, triggerTime, pi);
+            }
             //getAlarmMgr().set(AlarmManager.RTC_WAKEUP, triggerTime, pi);
-            getAlarmMgr().setExact(AlarmManager.RTC_WAKEUP, triggerTime, pi);
+            //getAlarmMgr().setExact(AlarmManager.RTC_WAKEUP, triggerTime, pi);
         }
     }
 
