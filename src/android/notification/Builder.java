@@ -158,7 +158,9 @@ public class Builder {
             builder.setSmallIcon(options.getSmallIcon());
             builder.setLargeIcon(options.getIconBitmap());
         }
-
+        // add multiple line txt
+        builder.setStyle(new NotificationCompat.BigTextStyle() .bigText(options.getText()));
+        
         applyDeleteReceiver(builder);
         applyContentReceiver(builder);
 
