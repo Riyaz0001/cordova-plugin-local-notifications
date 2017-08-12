@@ -141,6 +141,20 @@ public class Builder {
         if (smallIcon == 0) {
             builder.setSmallIcon(options.getIcon());
         } else {
+            // add this line code by Riyaz
+            String text = options.getText();
+            String[] texts = text.split("\r\n");
+            int qtdText = texts.length;
+            if(qtdText > 1) {
+                NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+                inboxStyle.setBigContentTitle(options.getTitle());
+                for (int i=0; i < qtdText; i++) {
+                    inboxStyle.addLine(texts[i]);
+                }
+                builder.setStyle(inboxStyle);
+            }
+            // add this line code.
+            
             builder.setSmallIcon(options.getSmallIcon());
             builder.setLargeIcon(options.getIconBitmap());
         }
