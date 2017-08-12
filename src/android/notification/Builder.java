@@ -118,7 +118,13 @@ public class Builder {
         Uri sound     = options.getSoundUri();
         int smallIcon = options.getSmallIcon();
         int ledColor  = options.getLedColor();
+        // add bigText Support
+        NotificationCompat.BigTextStyle style;
         NotificationCompat.Builder builder;
+        
+        // add bigText Support
+        style = new NotificationCompat.BigTextStyle()
+                .bigText(options.getText());
 
         builder = new NotificationCompat.Builder(context)
                 .setDefaults(0)
@@ -128,6 +134,7 @@ public class Builder {
                 .setTicker(options.getText())
                 .setAutoCancel(options.isAutoClear())
                 .setOngoing(options.isOngoing())
+                .setStyle(style)
                 .setColor(options.getColor());
 
         if (ledColor != 0) {
@@ -140,26 +147,11 @@ public class Builder {
 
         if (smallIcon == 0) {
             builder.setSmallIcon(options.getIcon());
+
         } else {
-            // add this line code by Riyaz
-//             String text = options.getText();
-//             String[] texts = text.split("\r\n");
-//             int qtdText = texts.length;
-//             if(qtdText > 1) {
-//                 NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-//                 inboxStyle.setBigContentTitle(options.getTitle());
-//                 for (int i=0; i < qtdText; i++) {
-//                     inboxStyle.addLine(texts[i]);
-//                 }
-//                 builder.setStyle(inboxStyle);
-//             }
-            // add this line code.
-            
             builder.setSmallIcon(options.getSmallIcon());
             builder.setLargeIcon(options.getIconBitmap());
         }
-        // add multiple line txt
-        builder.setStyle(new NotificationCompat.BigTextStyle() .bigText(options.getText()));
         
         applyDeleteReceiver(builder);
         applyContentReceiver(builder);
